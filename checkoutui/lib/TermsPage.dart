@@ -42,12 +42,12 @@ class _TermsPageState extends State<TermsPage> {
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: Colors.white, width: 2)
               ),
-              child: Text(
-                getTandC(),
-                style: const TextStyle(
-                  color: Colors.amber,
-                  fontSize: 22
-                ),
+              child: SingleChildScrollView(
+                child: Container(
+                  height: 615,
+                  width: _width*.6,
+                  child: getTandC()
+                )
               )
             ),
             const SizedBox(
@@ -80,27 +80,84 @@ class _TermsPageState extends State<TermsPage> {
     );
   }
 
-  String getTandC() {
-    return "About this service\n"
-    + "The Technology Checkout Desk is a service desk that allows patrons to check out digital equipment "
-    + "and accessories for personal use. It is located on the Lower Level of the Belk Library and Information "
-    + "Commons, next to the main stairwell and adjacent to the Digital Media Studio. Refer to the floor plan "
-    + "for a detailed map of the Lower Level, as well as the Technology Checkout Desk calendar (click on "
-    + "“Technology Checkout Desk” tab) for our updated hours.\n"
+  Widget getTandC() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: <Widget>[
+        // About
+        RichText(
+          text: TextSpan(children: [
+            TextSpan(
+              text: "About this service\n",
+              style: header()
+            ),
+            TextSpan(
+              text: "The Technology Checkout Desk is a service desk that allows patrons to check out digital equipment "
+                + "and accessories for personal use. It is located on the Lower Level of the Belk Library and Information "
+                + "Commons, next to the main stairwell and adjacent to the Digital Media Studio. Refer to the floor plan "
+                + "for a detailed map of the Lower Level, as well as the Technology Checkout Desk calendar (click on "
+                + "“Technology Checkout Desk” tab) for our updated hours.\n",
+              style: body()
+            ),
+          ])
+        ),
+        // checkout
+        RichText(
+          text: TextSpan(children: [
+            TextSpan(
+              text: "Check-out policies and procedures\n",
+              style: header()
+            ),
+            TextSpan(
+              text: "No reservations: We do not reserve equipment for individuals or classes, all items are first come/first serve.\n"
+                "Returns: Equipment must be returned to the Technology Checkout Desk during open hours.\n"
+                "Renewals: No online or over the phone renewals. Equipment must be returned to the desk for renewal.\n"
+                "Responsibility: You are responsible for overdue, lost or damaged equipment and peripherals. Overdue fines "
+                "are automatically applied to your Student Account for all equipment returned late (\$5 a day per checked "
+                "out item for daily equipment).\n",
+                // "\nBilling: Keeping items out for seven days past their initial due date will result in being billed for the "
+                // "full cost of the item.  Returning it will remove this bill and replace it with overdue fines.\n",
+              style: body()
+            ),
+          ])
+        ),
+        // Billing
+        RichText(text: TextSpan(children: [
+          TextSpan(
+            text: "\nBilling: Keeping items out for seven days past their initial due date will result in being billed for the "
+              "full cost of the item.  Returning it will remove this bill and replace it with overdue fines.\n",
+            style: body()
+          ),
+        ])),
+        // suggest
+        RichText(
+          text: TextSpan(children: [
+            TextSpan(
+              text: "\nSuggest equipment for purchase\n",
+              style: header()
+            ),
+            TextSpan(
+              text: "Interested in suggesting equipment for the Technology Checkout Desk to circulate?  Please do so using the "
+                "Technology Checkout Desk Equipment Request form and we will take it under consideration.",
+              style: body()
+            ),
+          ])
+        ),
+        const SizedBox(height: 15,)
+      ],
+    );
+  }
 
-    + "Check-out policies and procedures\n"
-    + "No reservations: We do not reserve equipment for individuals or classes, all items are first come/first serve.\n"
-    + "Returns: Equipment must be returned to the Technology Checkout Desk during open hours.\n"
-    + "Renewals: No online or over the phone renewals. Equipment must be returned to the desk for renewal.\n"
-    + "Responsibility: You are responsible for overdue, lost or damaged equipment and peripherals. Overdue fines "
-    + "are automatically applied to your Student Account for all equipment returned late (\$5 a day per checked "
-    + "out item for daily equipment).\n"
-
-    + "Billing: Keeping items out for seven days past their initial due date will result in being billed for the "
-    + "full cost of the item.  Returning it will remove this bill and replace it with overdue fines.\n"
-
-    + "Suggest equipment for purchase\n"
-    + "Interested in suggesting equipment for the Technology Checkout Desk to circulate?  Please do so using the "
-    + "Technology Checkout Desk Equipment Request form and we will take it under consideration.";
+  TextStyle header() {
+    return const TextStyle(
+      color: Colors.white,
+      fontSize: 24
+    );
+  }
+  TextStyle body() {
+    return const TextStyle(
+      color: Colors.amber,
+      fontSize: 18
+    );
   }
 }
