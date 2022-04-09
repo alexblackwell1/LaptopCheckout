@@ -46,18 +46,37 @@ class _SwipePageState extends State<SwipePage> {
               children: <Widget>[
                 if (numComputers == -1)  
                   CircularProgressIndicator(),
-                if (numComputers >= 0)
+                if (numComputers == 0)
+                  Text(
+                    "Sorry, no laptops are available",
+                    style: const TextStyle(
+                      color: Colors.amber,
+                      fontSize: 32
+                    ),
+                  ),
+                if (numComputers == 1)
+                  Text(
+                    "1 laptop is available",
+                    style: const TextStyle(
+                      color: Colors.amber,
+                      fontSize: 32
+                    ),
+                  ),
+                if (numComputers > 1)
                   Text(
                     numComputers.toString() + " laptops are available",
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: Colors.amber,
+                      fontSize: 32
                     ),
                   ),
+                SizedBox(height: 35),
                 Container(
                   child: const Text(
                     "Swipe your AppCard to Start",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.amber,
+                      fontSize: 32
                     ),
                   )
                 ),

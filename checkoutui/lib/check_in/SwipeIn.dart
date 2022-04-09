@@ -32,7 +32,7 @@ class _SwipeInPageState extends State<SwipeInPage> {
     if (userID > 100000000 && userID < 1000000000) {
       sendStudent(userID.toString());
     }
-    
+
     double _width = MediaQuery.of(context).size.width;
     double _height = MediaQuery.of(context).size.height;
     
@@ -60,10 +60,10 @@ class _SwipeInPageState extends State<SwipeInPage> {
                 border: Border.all(color: Colors.white, width: 2)
               ),
               child: const Text(
-                "Swipe to check in",
+                "Swipe to Check-in",
                 style: TextStyle(
                   color: Colors.amber,
-                  fontSize: 24
+                  fontSize: 32
                 ),
               ),
             ),

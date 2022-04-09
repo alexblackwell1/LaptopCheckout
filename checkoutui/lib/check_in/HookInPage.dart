@@ -50,7 +50,7 @@ class _HookInPageState extends State<HookInPage> {
                 "Please plug in the laptop",
                 style: TextStyle(
                   color: Colors.amber,
-                  fontSize: 28
+                  fontSize: 32
                 ),
               )
             );
