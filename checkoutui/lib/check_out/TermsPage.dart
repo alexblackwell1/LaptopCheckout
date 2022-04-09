@@ -16,8 +16,9 @@ class _TermsPageState extends State<TermsPage> {
     double _width = MediaQuery.of(context).size.width;
     double _height = MediaQuery.of(context).size.height;
 
-    if (pageChange)
-      return SwipePage();
+    if (pageChange) {
+      return const SwipePage();
+    }
 
     return Scaffold(
       body: Container(

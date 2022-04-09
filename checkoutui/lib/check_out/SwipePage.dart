@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:checkoutui/check_out/InstructionsPage.dart';
+import 'package:checkoutui/main.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:mysql1/mysql1.dart';
@@ -16,9 +17,18 @@ class SwipePage extends StatefulWidget {
 class _SwipePageState extends State<SwipePage> {
   int userID = 0;
   int numComputers = -1;
+  int returnHome = 0;
 
   @override
   Widget build(BuildContext context) {
+
+    if (returnHome == 2) {
+      return const OutInPage();
+    }
+
+    if (returnHome == 1) {
+      goHome();
+    }
 
     if (userID > 100000000 && userID < 1000000000) {
       sendStudent(userID.toString());
@@ -45,19 +55,19 @@ class _SwipePageState extends State<SwipePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 if (numComputers == -1)  
-                  CircularProgressIndicator(),
+                  const CircularProgressIndicator(),
                 if (numComputers == 0)
-                  Text(
+                  const Text(
                     "Sorry, no laptops are available",
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.amber,
                       fontSize: 32
                     ),
                   ),
                 if (numComputers == 1)
-                  Text(
+                  const Text(
                     "1 laptop is available",
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.amber,
                       fontSize: 32
                     ),
@@ -70,17 +80,17 @@ class _SwipePageState extends State<SwipePage> {
                       fontSize: 32
                     ),
                   ),
-                SizedBox(height: 35),
-                Container(
-                  child: const Text(
+                const SizedBox(height: 35),
+                if (numComputers > 0)
+                  const Text(
                     "Swipe your AppCard to Start",
                     style: TextStyle(
                       color: Colors.amber,
                       fontSize: 32
                     ),
-                  )
-                ),
-                Container(
+                  ),
+                if (numComputers > 0)
+                SizedBox(
                   width: 0.0001,
                   height: 0.0001,
                   child:TextField(
@@ -91,7 +101,7 @@ class _SwipePageState extends State<SwipePage> {
                       });
                     },
                   )
-                )
+                ),
               ],
             );
           }
@@ -121,6 +131,9 @@ class _SwipePageState extends State<SwipePage> {
     // print(needed.body.toString());
     setState(() {
       numComputers = int.parse(needed.body.toString());
+      if (numComputers == 0) {
+        returnHome = 1;
+      }
     });
   }
 
@@ -137,6 +150,13 @@ class _SwipePageState extends State<SwipePage> {
           error.toString() +
           " stackTrace> " +
           stackTrace.toString());
+    });
+  }
+
+  Future<void> goHome() async {
+    await Future.delayed(const Duration(seconds: 4));
+    setState(() {
+      returnHome = 2;
     });
   }
 
