@@ -92,11 +92,11 @@ class _SwipeInPageState extends State<SwipeInPage> {
     var request = http.post(Uri.parse(url), body: {"student": id})
       .then((result) {
         print(result.body);
-        needed = result;
+        needed = result.body;
       });
 
     setState(() {
-      if (int.parse(needed) == 10) {
+      if (int.parse(needed) == 0) {
         inSystem = -1;
       }
       else {
