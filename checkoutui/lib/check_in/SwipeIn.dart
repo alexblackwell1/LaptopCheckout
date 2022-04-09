@@ -87,17 +87,14 @@ class _SwipeInPageState extends State<SwipeInPage> {
   Future<void> sendStudent(String id) async {
     String url = "http://192.168.1.2/verify.php";
 
-    var request = await HttpClient().getUrl(Uri.parse(url));
-    // sends the request
-    var response = await request.close(); 
-
     var needed;
-    // transforms and prints the response
-    await for (var contents in response.transform(Utf8Decoder())) {
-      needed = contents;
-      print(contents);
-    }
-    
+
+    var request = http.post(Uri.parse(url), body: {"student": id})
+      .then((result) {
+        print(result);
+        needed = result;
+      });
+
     setState(() {
       if (int.parse(needed) == 10) {
         inSystem = -1;
