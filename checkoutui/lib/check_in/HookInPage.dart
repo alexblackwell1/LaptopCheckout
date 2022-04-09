@@ -61,7 +61,7 @@ class _HookInPageState extends State<HookInPage> {
   }
 
   Future check() async {
-    await Future.delayed(const Duration(seconds: 5));
+    await Future.delayed(const Duration(seconds: 12));
     setState(() {
       nextPage = true;
     });
