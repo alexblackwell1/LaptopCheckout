@@ -1,6 +1,6 @@
 
+import 'package:checkoutui/check_out/SwipePage.dart';
 import 'package:flutter/material.dart';
-import 'package:checkoutui/SwipePage.dart';
 
 class TermsPage extends StatefulWidget {
   const TermsPage({Key? key}) : super(key: key);

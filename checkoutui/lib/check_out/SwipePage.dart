@@ -1,8 +1,7 @@
 
 import 'dart:convert';
 
-import 'package:checkoutui/Env.dart';
-import 'package:checkoutui/InstructionsPage.dart';
+import 'package:checkoutui/check_out/InstructionsPage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:mysql1/mysql1.dart';
@@ -62,16 +61,17 @@ class _SwipePageState extends State<SwipePage> {
                     ),
                   )
                 ),
-                TextField(
-                  autofocus: true,
-                  decoration: const InputDecoration(
-                    hintText: 'Swipe or enter student ID',
-                  ),
-                  onChanged: (value) {
-                    setState(() {
-                      userID = int.tryParse(value)!;
-                    });
-                  },
+                Container(
+                  width: 0.0001,
+                  height: 0.0001,
+                  child:TextField(
+                    autofocus: true,
+                    onChanged: (value) {
+                      setState(() {
+                        userID = int.tryParse(value)!;
+                      });
+                    },
+                  )
                 )
               ],
             );
