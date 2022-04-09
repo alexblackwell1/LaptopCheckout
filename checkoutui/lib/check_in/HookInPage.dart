@@ -1,23 +1,22 @@
 
-import 'package:checkoutui/main.dart';
+import 'package:checkoutui/check_in/ThankPage.dart';
 import 'package:flutter/material.dart';
 
-class ThankPage extends StatefulWidget {
-  const ThankPage({Key? key}) : super(key: key);
+class HookInPage extends StatefulWidget {
+  const HookInPage({Key? key}) : super(key: key);
 
   @override
-  State<ThankPage> createState() => _ThankPageState();
+  State<HookInPage> createState() => _HookInPageState();
 }
 
-class _ThankPageState extends State<ThankPage> {
-  int userID = 0;
-  bool reset = false;
+class _HookInPageState extends State<HookInPage> {
+  bool nextPage = false;
 
   @override
   Widget build(BuildContext context) {
 
-    if (reset) {
-      return const OutInPage();
+    if (nextPage) {
+      return const ThankPage();
     }
 
     double _width = MediaQuery.of(context).size.width;
@@ -35,13 +34,13 @@ class _ThankPageState extends State<ThankPage> {
         ),
         alignment: Alignment.center,
         child: FutureBuilder(
-          future: timer(), // a previously-obtained Future<String> or null
+          future: check(), // a previously-obtained Future<String> or null
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             return const Text(
-              "Thank You",
+              "Please plug in the laptop",
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 32
+                fontSize: 28
               ),
             );
           }
@@ -50,10 +49,12 @@ class _ThankPageState extends State<ThankPage> {
     );
   }
 
-  Future<void> timer() async {
-    await Future.delayed(const Duration(seconds: 10));
+  Future check() async {
+    await Future.delayed(const Duration(seconds: 5));
     setState(() {
-      reset = true;
+      nextPage = true;
     });
   }
 }
+
+

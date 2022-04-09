@@ -1,4 +1,5 @@
 
+import 'package:checkoutui/check_in/HookInPage.dart';
 import 'package:checkoutui/check_in/ThankPage.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class _SwipeInPageState extends State<SwipeInPage> {
 
     if (userID > 100000000 && userID < 1000000000) {
       // sendStudent(userID.toString());
-      return const ThankPage();
+      return const HookInPage();
     }
 
     double _width = MediaQuery.of(context).size.width;

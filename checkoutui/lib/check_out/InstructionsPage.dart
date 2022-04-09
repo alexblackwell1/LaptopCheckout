@@ -1,4 +1,5 @@
 
+import 'package:checkoutui/main.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -10,7 +11,13 @@ class InstructionsPage extends StatefulWidget {
 }
 
 class _InstructionsPageState extends State<InstructionsPage> {
+  bool reset = false;
+
   Widget build(BuildContext context) {
+
+    if (reset) {
+      return const OutInPage();
+    }
     double _width = MediaQuery.of(context).size.width;
     double _height = MediaQuery.of(context).size.height;
 
@@ -27,36 +34,45 @@ class _InstructionsPageState extends State<InstructionsPage> {
             image: AssetImage("images/terms_bkg.jpg")
           )
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              height: _height*.7,
-              width: _width*.7,
-              padding: const EdgeInsets.all(10),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.6),
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.white, width: 2)
-              ),
-              child: Text(
-                "Grab a Laptop\n"
-                "It will be due on "
-                + _due,
-                // + due.month.toString() + " "
-                // + due.day.toString() + " "
-                // + due.year.toString(),
-                style: const TextStyle(
-                  color: Colors.amber,
-                  fontSize: 32,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            )
-          ]
+        child: FutureBuilder(
+          future: timer(), // a previously-obtained Future<String> or null
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  height: _height*.7,
+                  width: _width*.7,
+                  padding: const EdgeInsets.all(10),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.6),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.white, width: 2)
+                  ),
+                  child: Text(
+                    "Grab a Laptop\n"
+                    "It will be due on "
+                    + _due,
+                    style: const TextStyle(
+                      color: Colors.amber,
+                      fontSize: 32,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                )
+              ]
+            );
+          }
         )
       )
     );
+  }
+
+  Future<void> timer() async {
+    await Future.delayed(const Duration(seconds: 10));
+    setState(() {
+      reset = true;
+    });
   }
 }
