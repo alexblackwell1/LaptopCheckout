@@ -21,10 +21,13 @@ class _SwipeInPageState extends State<SwipeInPage> {
 
     if (userID > 100000000 && userID < 1000000000) {
       sendStudent(userID.toString());
-      if (inSystem == 0) {
-        return const OutInPage();
-      }
+    }
+
+    if (inSystem >= 1) {
       return const HookInPage();
+    }
+    if (inSystem == -1) {
+      return const OutInPage();
     }
 
     double _width = MediaQuery.of(context).size.width;
@@ -104,9 +107,12 @@ class _SwipeInPageState extends State<SwipeInPage> {
       //     " stackTrace> " +
       //     stackTrace.toString());
     });
-    // print(needed.body.toString());
+    print(needed.body.toString());
     setState(() {
       inSystem = int.parse(needed.body.toString());
+      if (inSystem == 0) {
+        inSystem = -1;
+      }
     });
   }
 }
