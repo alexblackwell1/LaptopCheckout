@@ -1,6 +1,8 @@
 
 import 'package:checkoutui/check_in/HookInPage.dart';
 import 'package:checkoutui/check_in/ThankPage.dart';
+import 'package:checkoutui/main.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 class SwipeInPage extends StatefulWidget {
@@ -12,12 +14,16 @@ class SwipeInPage extends StatefulWidget {
 
 class _SwipeInPageState extends State<SwipeInPage> {
   int userID = 0;
+  int inSystem = 0;
 
   @override
   Widget build(BuildContext context) {
 
     if (userID > 100000000 && userID < 1000000000) {
-      // sendStudent(userID.toString());
+      sendStudent(userID.toString());
+      if (inSystem == 0) {
+        return const OutInPage();
+      }
       return const HookInPage();
     }
 
@@ -37,11 +43,22 @@ class _SwipeInPageState extends State<SwipeInPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              "Swipe to check in",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24
+            Container(
+              height: _height*.7,
+              width: _width*.7,
+              padding: const EdgeInsets.all(10),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Colors.grey.withOpacity(0.6),
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Colors.white, width: 2)
+              ),
+              child: const Text(
+                "Swipe to check in",
+                style: TextStyle(
+                  color: Colors.amber,
+                  fontSize: 24
+                ),
               ),
             ),
             SizedBox(
@@ -60,5 +77,36 @@ class _SwipeInPageState extends State<SwipeInPage> {
         )
       )
     );
+  }
+
+  Future<void> sendStudent(String id) async {
+    String url = "http://192.168.1.2/verify.php";
+    
+    var needed;
+    final query = await http.post(Uri.parse(url), body: {
+	    "student": id
+	  }).then((value) {
+          needed = value;
+    }).onError((error, stackTrace) {
+      print("onError> " +
+          error.toString() +
+          " stackTrace> " +
+          stackTrace.toString());
+    });
+
+    var response = await http.Client().get(Uri.parse(url), /*headers: headers*/)
+        .then((value) {
+          needed = value;
+      // print("onThen> " + value.body.toString());
+    }).onError((error, stackTrace) {
+      // print("onError> " +
+      //     error.toString() +
+      //     " stackTrace> " +
+      //     stackTrace.toString());
+    });
+    // print(needed.body.toString());
+    setState(() {
+      inSystem = int.parse(needed.body.toString());
+    });
   }
 }

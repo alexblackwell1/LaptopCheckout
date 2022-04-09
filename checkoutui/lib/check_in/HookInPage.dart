@@ -36,12 +36,23 @@ class _HookInPageState extends State<HookInPage> {
         child: FutureBuilder(
           future: check(), // a previously-obtained Future<String> or null
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-            return const Text(
-              "Please plug in the laptop",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 28
+            return Container(
+              height: _height*.7,
+              width: _width*.7,
+              padding: const EdgeInsets.all(10),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Colors.grey.withOpacity(0.6),
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Colors.white, width: 2)
               ),
+              child: const Text(
+                "Please plug in the laptop",
+                style: TextStyle(
+                  color: Colors.amber,
+                  fontSize: 28
+                ),
+              )
             );
           }
         )
