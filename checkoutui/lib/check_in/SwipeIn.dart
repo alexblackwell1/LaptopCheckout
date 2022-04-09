@@ -4,6 +4,8 @@ import 'package:checkoutui/check_in/ThankPage.dart';
 import 'package:checkoutui/main.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'dart:io';
 
 class SwipeInPage extends StatefulWidget {
   const SwipeInPage({Key? key}) : super(key: key);
@@ -84,7 +86,28 @@ class _SwipeInPageState extends State<SwipeInPage> {
 
   Future<void> sendStudent(String id) async {
     String url = "http://192.168.1.2/verify.php";
+
+    var request = await HttpClient().getUrl(Uri.parse(url));
+    // sends the request
+    var response = await request.close(); 
+
+    var needed;
+    // transforms and prints the response
+    await for (var contents in response.transform(Utf8Decoder())) {
+      needed = contents;
+      print(contents);
+    }
     
+    setState(() {
+      if (int.parse(needed) == 10) {
+        inSystem = -1;
+      }
+      else {
+        inSystem = 1;
+      }
+    });
+    
+    /*
     var needed;
     final query = await http.post(Uri.parse(url), body: {
 	    "student": id
@@ -114,5 +137,6 @@ class _SwipeInPageState extends State<SwipeInPage> {
         inSystem = -1;
       }
     });
+    */
   }
 }
