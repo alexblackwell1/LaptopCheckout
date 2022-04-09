@@ -21,9 +21,6 @@ class _SwipeInPageState extends State<SwipeInPage> {
   @override
   Widget build(BuildContext context) {
 
-    if (userID > 100000000 && userID < 1000000000) {
-      sendStudent(userID.toString());
-    }
 
     if (inSystem >= 1) {
       return const HookInPage();
@@ -32,6 +29,10 @@ class _SwipeInPageState extends State<SwipeInPage> {
       return const OutInPage();
     }
 
+    if (userID > 100000000 && userID < 1000000000) {
+      sendStudent(userID.toString());
+    }
+    
     double _width = MediaQuery.of(context).size.width;
     double _height = MediaQuery.of(context).size.height;
     
