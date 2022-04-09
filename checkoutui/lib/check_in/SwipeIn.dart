@@ -96,12 +96,13 @@ class _SwipeInPageState extends State<SwipeInPage> {
       });
 
     setState(() {
-      if (int.parse(needed) == 0) {
+      if (needed == "0") {
         inSystem = -1;
       }
       else {
         inSystem = 1;
       }
+      print(inSystem);
     });
     
     /*
