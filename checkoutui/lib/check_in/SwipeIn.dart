@@ -91,7 +91,7 @@ class _SwipeInPageState extends State<SwipeInPage> {
 
     var request = http.post(Uri.parse(url), body: {"student": id})
       .then((result) {
-        print(result.body);
+        print("get: "+result.body+"\n");
         needed = result.body;
       });
 
