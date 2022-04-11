@@ -1,6 +1,6 @@
 <?php
 	$username = "root";
-	$password = "blics101";
+	$password = "PASSWORD_HERE";
 	$host = "localhost";
 	$db_name = "LaptopCheckout";
 
