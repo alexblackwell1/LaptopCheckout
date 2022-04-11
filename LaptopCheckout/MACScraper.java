@@ -15,7 +15,7 @@ public class MACScraper {
 	private ArrayList<String> prev = new ArrayList<String>();
 	private ArrayList<String> temp = new ArrayList<String>();
 	private String username = "root";
-	private String password = "blics101";
+	private String password = "PASSWORD_HERE";
 	private String dbname = "LaptopCheckout";
 	private String routerMAC = "2C:B0:5D:95:EB:C9";
 	
